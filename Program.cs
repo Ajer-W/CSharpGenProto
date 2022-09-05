@@ -42,7 +42,7 @@ class Program
                     string protoName = s.Replace("message", "");
                     protoNameList.AddLast(protoName);
                     protoDict.Add(protoName, true);
-                    Console.WriteLine(protoName);
+                    //Console.WriteLine(protoName);
                 }
             }
             sr.Close();
@@ -50,9 +50,9 @@ class Program
 
             string cmd = protogen + " --csharp_out=" + ProtoToCSPath + " -I " + protoPath + " " + file.FullName;
             cmds.Add(cmd);
-            Cmd(cmds);
         }
 
+        Cmd(cmds);
         GetCSFileContent();
         CreateLuaProtoIdFile();
 
@@ -236,7 +236,7 @@ class Program
                             string changeLine = $"public sealed partial class {curr.Value} :IProto , pb::IMessage<{curr.Value}>";
                             protoName = curr.Value;
                             sb.AppendLine(changeLine);
-                            Console.WriteLine(line);
+                            //Console.WriteLine(line);
                             break;
                         }
                         curr = curr.Next;
@@ -272,6 +272,8 @@ class Program
                 fs.Close();
             }
         }
+
+        Console.WriteLine("Gen Proto Finish!");
     }
 
     public static void DeleteFile(string filePath)
