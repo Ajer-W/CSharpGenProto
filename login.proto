@@ -1,0 +1,14 @@
+//登录模块协议 @protocol_id_start = 2000
+
+
+syntax = "proto3";
+
+message ReqRoleLogin{
+    string account = 1;     //账号
+    string passwd = 2;      //密码
+}
+
+message ResRoleLogin{
+    int32 code = 1;           //错误码
+    string token = 2;       //令牌
+}

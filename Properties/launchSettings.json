@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GenProto": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\GenProto\r\nD:\\GenProto\\Data\\ProtoDefine.cs\r\nD:\\GenProto\\Data\\ProtoDefine.lua\r\nD:\\GenProto\\Data\\Proto"
+    }
+  }
+}

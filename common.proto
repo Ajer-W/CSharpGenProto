@@ -1,0 +1,15 @@
+//通用结构
+
+syntax = "proto3";
+
+//玩家角色结构体，基础信息
+message PlayerInfo {				
+    int64 roleId = 1;				// 角色id
+    string nick = 2;				// 角色名称
+    int32 sex = 3;				    // 性别
+    int32 headId = 4;				// 玩家头像id
+    int32 lv = 5;					// 等级
+    int32 gold = 6;				    // 金币
+    int32 exp = 7;                  // 经验
+}
+

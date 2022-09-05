@@ -1,0 +1,75 @@
+//@protocol_id_start = 1000
+syntax = "proto3";
+message Head
+{
+  int32 time = 1;
+  int32 command = 2;
+  bytes _auto = 4;
+  int32 ID = 5;
+}
+message Heart
+{
+}
+message Vector3
+{
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+///这个即将过期
+message Move
+{
+  Vector3 position = 1;
+  Vector3 rotation = 2;
+  float speed=3;
+  Vector3 targetPoint=4;
+}
+message Jump
+{
+
+}
+message Run
+{
+  float speed = 2;
+  Vector3 Direction = 3;
+}
+message RunStop
+{
+  Vector3 position = 2;
+  Vector3 rotation = 3;
+}
+message EnterScene
+{
+  string roomId = 1;
+  int32 userId = 2;
+  string username = 3;
+  string avater = 4;
+  int32 sex = 5;
+  Vector3 position = 6;
+}
+message EnterSceneReturn
+{
+  int32 userId = 1;
+  string userName = 2;
+  string avater = 4;
+  int32 sex = 5;
+  Vector3 postion = 6;
+}
+message LeaveScene
+{
+	string roomId = 1;
+    int32 userId = 2;
+}
+message LeaveSceneReturn
+{
+  int32 userId = 1;
+  string userName = 2;
+}
+message CAction
+{
+  int32 code = 1;
+}
+message CActionReturn
+{
+	int32 code = 1;
+}
