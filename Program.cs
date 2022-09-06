@@ -53,8 +53,8 @@ class Program
         }
 
         Cmd(cmds);
-        GetCSFileContent();
-        CreateLuaProtoIdFile();
+        CreateCSharpProtoId();
+        CreateLuaProtoId();
 
         ChangeProtoContent();
         Console.ReadLine();
@@ -87,7 +87,7 @@ class Program
         return BitConverter.ToUInt16(CRC16(str), 0);
     }
 
-    private static void GetCSFileContent()
+    private static void CreateCSharpProtoId()
     {
         StringBuilder sb = new StringBuilder();
 
@@ -131,10 +131,10 @@ class Program
         sb.AppendLine("\t\treturn null;");
         sb.AppendLine("\t}");
         sb.AppendLine("}");
-        CreateProtoIdFile(CSProtoFilePath, sb.ToString());
+        CreateFile(CSProtoFilePath, sb.ToString());
     }
 
-    private static void CreateLuaProtoIdFile()
+    private static void CreateLuaProtoId()
     {
         StringBuilder sb = new StringBuilder();
         sb.AppendLine("local ProtoIdDefine = {");
@@ -149,10 +149,10 @@ class Program
         }
         sb.AppendLine("}");
         sb.AppendLine("return ProtoIdDefine;");
-        CreateProtoIdFile(LuaProtoFileName, sb.ToString());
+        CreateFile(LuaProtoFileName, sb.ToString());
     }
 
-    private static void CreateProtoIdFile(string filePath, string content)
+    private static void CreateFile(string filePath, string content)
     {
         //DeleteFile(filePath);
         using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
@@ -194,20 +194,19 @@ class Program
     {
         if (!string.IsNullOrEmpty(outLine.Data))
         {
-            Console.WriteLine(outLine.Data);
+            //Console.WriteLine(outLine.Data);
         }
     }
     private static void ErrorDataHandler(object sendingProcess, DataReceivedEventArgs outLine)
     {
         if (!string.IsNullOrEmpty(outLine.Data))
         {
-            Console.WriteLine(outLine.Data);
+            //Console.WriteLine(outLine.Data);
         }
     }
 
     private static void ChangeProtoContent()
     {
-        Console.WriteLine("========================ChangeProtoContent==========================");
         DirectoryInfo directory = new DirectoryInfo(ProtoToCSPath);
         FileInfo[] arrFiles = directory.GetFiles("*.cs", SearchOption.AllDirectories);
         foreach (FileInfo file in arrFiles)
@@ -262,15 +261,7 @@ class Program
 
             File.Delete(file.FullName);
 
-            using (FileStream fs2 = new FileStream(file.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
-            {
-                using (StreamWriter sw = new StreamWriter(fs2))
-                {
-                    sw.Write(sb.ToString());
-                    sw.Close();
-                }
-                fs.Close();
-            }
+            CreateFile(file.FullName, sb.ToString());
         }
 
         Console.WriteLine("Gen Proto Finish!");
